@@ -1,6 +1,4 @@
-async function launchGame() { 
-
-    let gameID = document.getElementById("gameID").value;
+async function launchGame(gameID) { 
     let rawSession = await fetch(`https://www.kogama.com/locator/session/?objectID=${gameID}&profileID=0&lang=en_US&type=play`).then(r=>r.text())
     session = JSON.parse(rawSession);
 
@@ -9,7 +7,7 @@ async function launchGame() {
     top.config = {
         "planetName": session.sessionID,
         "newPlanetName": session.sessionID,
-        "serverIP": "ws://" + session.serverIP + ":" + session.wsPort,
+        "serverIP": "wss://" + session.hostName + ":" + session.wssPort,
         "token": session.token,
         "sessionToken": session.sessionToken,
         "isSoftLaunch": false,
@@ -40,9 +38,16 @@ async function launchGame() {
     }
 
     let gameFrame = document.createElement("iframe");
-    gameFrame.src = "/player/"
+    gameFrame.src = location.origin + "/player/"
     gameFrame.style.cssText = "position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;";
     document.write(gameFrame.outerHTML);
 }
 
-document.getElementById("playButton").addEventListener("click", launchGame)
+document.getElementById("playButton").addEventListener("click", function () {
+    launchGame(document.getElementById("gameID").value);
+})
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('gameID')) {
+    launchGame(urlParams.get('gameID'))
+}

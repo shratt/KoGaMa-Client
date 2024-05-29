@@ -42,8 +42,8 @@ window.UNITY_unityDebugLog = function (message) {
     console.debug(message)
 }
 
-window.UNITY_sendStatHatCount = function () {
-
+window.UNITY_sendStatHatCount = function (message) {
+    console.debug(message)
 }
 
 window.UNITY_requestDomain = function () {
@@ -54,8 +54,8 @@ window.UNITY_readyForAd = function () {
 
 }
 
-window.UNITY_sendStatHatValue = function () {
-
+window.UNITY_sendStatHatValue = function (message) {
+    console.debug(message)
 }
 
 window.UNITY_gamePlayStatus = function () {
@@ -83,7 +83,7 @@ window.UNITY_showRewardedVideoAd = function (content) {
 } 
 
 window.UNITY_resetAFKtimer = function () {
-    
+    window.unityModule._SendMessageString("unity-player:heartbeat")
 }
 
 window.UNITY_gotoDisconnectedPage = function () {
