@@ -38,7 +38,7 @@ async function launchGame(gameID) {
     }
 
     let gameFrame = document.createElement("iframe");
-    gameFrame.src = location.origin + "/player/"
+    gameFrame.src = location.href + "player/"
     gameFrame.style.cssText = "position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;";
     document.write(gameFrame.outerHTML);
 }
@@ -51,3 +51,4 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('gameID')) {
     launchGame(urlParams.get('gameID'))
 }
+document.getElementById("playButton").addEventListener("click", launchGame)
