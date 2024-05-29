@@ -9,7 +9,7 @@ async function launchGame() {
     top.config = {
         "planetName": session.sessionID,
         "newPlanetName": session.sessionID,
-        "serverIP": "wss://" + session.serverIP + ":" + session.wssPort,
+        "serverIP": "ws://" + session.serverIP + ":" + session.wsPort,
         "token": session.token,
         "sessionToken": session.sessionToken,
         "isSoftLaunch": false,
